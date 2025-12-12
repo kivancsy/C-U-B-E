@@ -1,13 +1,15 @@
 import os
 import time
 import math
+import shutil
 
-WIDTH = 80
-HEIGHT = 40
+
+def get_terminal_size():
+    cols, rows = shutil.get_terminal_size()
+    return cols - 1, rows - 1
+
 
 CUBE_SIZE = 10
-
-buffer = [" "] * (WIDTH * HEIGHT)
 
 
 def plot(x, y, char="*"):
@@ -68,6 +70,9 @@ A = 0
 B = 0
 
 while True:
+    WIDTH, HEIGHT = get_terminal_size()
+    buffer = [" "] * (WIDTH * HEIGHT)
+
     buffer = [" "] * (WIDTH * HEIGHT)
 
     projected = []
@@ -85,6 +90,9 @@ while True:
 
     for i in range(HEIGHT):
         print("".join(buffer[i * WIDTH: (i + 1) * WIDTH]))
+
+    text = "Issa  C U B E  innit?"
+    print(" " * ((WIDTH - len(text)) // 2) + text)
 
     A += 0.05
     B += 0.03
